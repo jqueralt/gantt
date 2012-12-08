@@ -1,6 +1,6 @@
 \documentclass[a4paper,%
 	      10pt,%
-              %DIV=14,%
+              DIV=14,%
               parskip=half,%
 ]{scrartcl}
 \usepackage[utf8]{inputenc}
@@ -12,9 +12,11 @@
 %\usepackage[bitstream-charter]{mathdesign}
 \usepackage{tgheros}
 \usepackage{tgcursor}
-%Century Schoolbook L
+
+
 %%% colors
 \usepackage[dvipsnames]{color}
+\usepackage{eso-pic}                           %per clavar imatges
 
 \usepackage[pdftex,%                           % paquet per fer aparèixer els colors
 		dvipdfm,%
@@ -30,6 +32,20 @@
 \usepackage{pgfgantt}
 % ftp://ftp.di.uminho.pt/pub/ctan/graphics/pgf/contrib/pgfgantt/pgfgantt.pdf
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% paquet pel formatatge de la pàgina: capçaleres i peus
+\usepackage[headsepline]{scrpage2}
+\clearscrheadfoot
+\setlength{\headheight}{45pt}                           % espai extra per la capçalera
+\addtokomafont{pageheadfoot}{\normalfont\sffamily\color{gray}}
+\setheadsepline{.4pt}[\color{gray}]
+
+\pagestyle{scrheadings}
+\ohead[]{\Titol}
+\ihead[]{cata\LaTeX{}}
+\cfoot[]{-- \thepage --}
+
+
+
 
 \usepackage{hyperref}    
 
@@ -56,9 +72,17 @@
 \date{\today}
 
 \begin{document}
-
+\thispagestyle{empty}
+\AddToShipoutPicture*
+{%
+\put(250,200)%
+{\includegraphics[scale=.4]{qrplanet.png}}
+}
 \maketitle
 
+\newpage
+
+\pagestyle{scrheadings}
 \section{Presentació}
 Diu la \href{http://ca.wikipedia.org/wiki/Diagrama_de_Gantt}{Vikipèdia} que \textit{el diagrama de Gantt és una de les tècniques usades tant per l'administració pública com per l'empresa privada com a eina de gestió de la qualitat. Concretament, és una eina de planificació del treball, ja que presenta totes les activitats que s'han de realitzar i quan s'han de realitzar, i permet tenir una idea de com avança el projecte i si és necessari reprogramar les actuacions planificades per tal d'adequar el projecte al nou entorn o necessitats. S'ha adaptat al treball per projectes en educació, repartint les feines del grup}.
 
@@ -196,7 +220,7 @@ title height=1%
          bar/.style={fill=Purple}% estil
          ]{Avaluació}{4}{7}\\ 
 % objectiu:
-\ganttmilestone[name=obj4]{Preparació línia de produciió}{3}\\
+\ganttmilestone[name=obj4]{Preparació línia de produció}{3}\\
 % objectiu:
 \ganttmilestone[name=obj5]{Posada a la venda}{6}\\
 % objectiu:
@@ -215,7 +239,9 @@ title height=1%
 \ganttlink{b1}{b2}
 \end{ganttchart}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Exemple 3}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \definecolor{barblue}{RGB}{153,204,254}
 \definecolor{groupblue}{RGB}{51,102,254}
